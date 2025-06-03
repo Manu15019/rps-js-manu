@@ -38,3 +38,34 @@ function getHumanChoice () {
 let humanScore = 0;
 let computerScore = 0;
 
+/*
+playround function (humanChoice, computerChoice)
+humanChoice = getHumanChoice();
+computerChoice = getComputerChoice
+if humanChoice.equal computerChoice
+    returm "tie"
+else if (computerChoice.equal rock && humanChoice.equal scissors) || (computerChoice.equal paper && humanChoice.equal rock) || (computerChoice.equal scissors && humanChoice.equal paper)
+    computerScore + 1
+    return "you lost :("
+else
+    humanScore + 1
+    return "you won!"
+*/
+
+function playRound (humanChoice, computerChoice){
+humanChoice = getHumanChoice();
+computerChoice = getComputerChoice
+if (humanChoice.equals(computerChoice) {
+    return "tie";
+}
+else if ((computerChoice.equals(rock) && humanChoice.equals(scissors)) 
+    || (computerChoice.equals(paper) && humanChoice.equals(rock)) 
+ || (computerChoice.equals(scissors) && humanChoice.equals(paper))){
+    computerScore + 1
+    return "you lost :("
+}
+else{
+    humanScore + 1
+    return "you won!"
+}
+}
