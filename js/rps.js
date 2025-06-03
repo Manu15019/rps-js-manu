@@ -33,3 +33,8 @@ function getHumanChoice () {
     console.log(choice);
 }
 
+// initialize variables for computer and human scores to 0
+
+let humanScore = 0;
+let computerScore = 0;
+
