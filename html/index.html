@@ -6,13 +6,48 @@
     <title>Document</title>
     <script src="../js/rps.js"></script>
 </head>
+
+<style>
+html{
+
+}
+
+h1, h2, h3{
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+
+</style>
+
 <body>
     <h1> Rock, Paper, Scissors</h1>
+    <h3 id = 'result'> Click a button to play!</h3> <br>
+    <h2 id = 'score'> Score      You: 0        Machine: 0 </h2>
+    
+    <div class = "buttons">
+    <img src = '../images/scissors.jpg'><br>
+    <button class = 'choice scissors' data-choice="scissors"> Scissors </button><br>
 
-    <!-- javascript -->
-     <script>
-console.log("hello world");
+    <img src = '../images/paper.avif'><br>
+     <button class = "choice paper" data-choice="paper"> Paper </button><br>
 
+    <img src = '../images/rock.webp'><br>
+    <button class = "choice rock" data-choice="rock"> Rock</button><br>
+    </div>
+
+    
+</body>
+
+ <!-- javascript -->
+
+    <script>
+
+    let humanScore = 0;
+    let computerScore = 0;
 /* 
 getComputerChoice function
 random number between 1 and 3
@@ -34,96 +69,33 @@ function getComputerChoice () {
     }
     }
 
-/*
-getHumanChoice function
-use scanner to log human choice
-make it lower case
-*/
-
-function getHumanChoice () {
-    let choice = prompt("Enter rock, paper, or scissors");
-    choice = choice.toLowerCase();
-    console.log("You choose:" + choice);
-    return choice;
-}
-
-// initialize variables for computer and human scores to 0
-
-let humanScore = 0;
-let computerScore = 0;
-
-/*
-playround function (humanChoice, computerChoice)
-humanChoice = getHumanChoice();
-computerChoice = getComputerChoice
-if humanChoice.equal computerChoice
-    returm "tie"
-else if (computerChoice.equal rock && humanChoice.equal scissors) || (computerChoice.equal paper && humanChoice.equal rock) || (computerChoice.equal scissors && humanChoice.equal paper)
-    computerScore + 1
-    return "you lost :("
-else
-    humanScore + 1
-    return "you won!"
-*/
-
 function playRound (humanChoice, computerChoice){
-// humanChoice = getHumanChoice();
-// computerChoice = getComputerChoice();
-if (humanChoice === computerChoice) {
-    return "Tie";
-}
-else if ((computerChoice === "rock" && humanChoice === "scissors") 
-    || (computerChoice === "paper" && humanChoice === "rock") 
-    || (computerChoice === "scissors" && humanChoice === "paper")){
-    computerScore ++;
-    return "You lost :("
-}
-else{
-    humanScore ++;
-    return "You won!"
-}
-}
-
-/*
-playGame function
-FOR rounds 1 to 5
-    get comp choice
-    get human choice
-    result call playRound
-    ENDFOR
-
-log final score
-IF human wins
-    print congrats ENDIF
-ELSE IF comp wins
-    print you lost ENDIF
-ELSE 
-    print tie
-*/
-
-function playGame() {
-    for (let x = 1; x < 6; x++){
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        let result = playRound(humanChoice, computerChoice);
-        console.log("Round " + x + ": " + result);
-        console.log("Score      You: " + humanScore + "       Machine:" + computerScore);
+    if (humanChoice === computerChoice) {
+        return "Tie";
     }
-
-    console.log("Final      You: " + humanScore + "       Machine:" + computerScore);
-
-    if(humanScore > computerScore){
-        console.log("Booyah!");
-    } else if(humanScore < computerScore){
-        console.log("Sigh...");
-    } else {
-        console.log("tie...try again");
+    if ((computerChoice === "rock" && humanChoice === "scissors") 
+        || (computerChoice === "paper" && humanChoice === "rock") 
+        || (computerChoice === "scissors" && humanChoice === "paper")){
+        computerScore ++;
+        return "You lost :("
+    }
+    else{
+        humanScore ++;
+        return "You won!"
     }
 }
-    playGame();
 
+document.querySelectorAll('.choice').forEach(button => {
+  button.addEventListener('click', () => {
+    const humanChoice = button.dataset.choice;
+    const computerChoice = getComputerChoice();
+    const resultText = playRound(humanChoice, computerChoice);
+
+    document.getElementById("result").textContent = resultText;
+    document.getElementById("score").textContent = `You: ${humanScore} | Computer: ${computerScore}`;
+  });
+});
 </script>
 
 
-</body>
 </html>
